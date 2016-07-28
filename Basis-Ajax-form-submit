@@ -1,0 +1,36 @@
+  // start the jQuery
+
+
+     $('#ajax-form').submit(function(event){
+       event.preventDefault();
+       ajaxFunction();
+     });
+
+     // FUNCTION TO TRIGGER THE AJAX
+    function ajaxFunction(){
+    // get the url of the WORDPRESS CORE file to deal with AJAX
+
+
+         // getting the email inputted
+         var form = $('#ajax-form');
+         	var formData = $(form).serialize();
+         var email = $('input[name=email]').val();
+
+         // the ajax
+         $.ajax({
+           type:"post",
+           url: $(form).attr('action'),
+           	data: formData,
+           // when complete run this
+           success:function(data){
+              $('#subscribe').attr('disabled','true');
+              $('#subscribe').val('Thanks!');
+              $('#subscribe').addClass('green');
+           }
+
+         });
+
+       }
+
+
+});
