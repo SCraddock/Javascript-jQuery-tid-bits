@@ -1,0 +1,18 @@
+// The sexy navigation background transition
+
+ $(window).scroll(function() { // on scrolling the page run this function
+   var img = document.getElementById('video'); // get the element (image)
+   var fadePoint = img.clientHeight; // get the height of the element
+   fadePoint = fadePoint - 146; // line up the edge of the image with that of the header ... the header is 146px tall as a a base
+
+
+	if ($(window).scrollTop() > fadePoint ){ // checks if the distance from the top is greater than the fade point.
+
+ 		$('.header__background').addClass('background'); // if it has add the class
+
+  } else {
+
+    $('.header__background').removeClass('background'); // if not it removes the class
+
+ 	}
+});
