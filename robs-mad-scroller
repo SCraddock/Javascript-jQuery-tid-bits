@@ -1,0 +1,81 @@
+
+
+// this made sams' head hurt
+
+$(window).scroll(function() { // on scrolling the page run this function
+
+    var pageHeight = $(document).height(); // gets the height of the whole document
+    var windowWidth = $(window).width(); // gets the width of the window
+    var userScroll = $(document).scrollTop();
+
+    var onePercentHeight = pageHeight / 100; // this is 1 percent of the total height of the body/html
+    var onePercentScroll = userScroll / 100; // this is 1 percent of the total height scrolled
+    var onePercentWindowWidth = windowWidth / 100;
+
+    var pageHeightRemaining = pageHeight - userScroll; // how much height we have left after scrolling
+    var heightNotSure = pageHeight - pageHeightRemaining; // not sure needed these steps
+    var percentNumber = pageHeight / heightNotSure;
+    var percent = percentNumber / 100;  // percent of page height that we have scrolled
+
+    var howManyPercents = percent / onePercentHeight;
+
+    // need to convert the percent of height scrolled into scroll width ygm
+
+    var scrollPercentConversion = howManyPercents * onePercentWindowWidth / 2; // this is the equal percentage of how much to move the div by
+
+    var opacify = howManyPercents * onePercentWindowWidth * 12; // this is the equal percentage of how much to move the div by
+
+    if(opacify >= 1 ){
+      opacify = 1;
+    }
+    if(opacify <= 0.2 ){
+      opacify = 0;
+    }
+
+    var scrollNumberConversion = windowWidth / scrollPercentConversion;
+
+    scrollNumberConversion = scrollNumberConversion / pageHeight * 2;
+
+    scrollNumberConversion = 100 - scrollNumberConversion;
+
+    var type = '%';
+
+    if (scrollNumberConversion >= 88){
+      scrollNumberConversion = 88;
+    }
+
+
+
+    var dribble_width = $('.dribbble_li').width();
+    var scrollLockEnd = dribble_width * 2;
+    if (scrollNumberConversion <= 0){
+
+
+      var tim = 72;
+      var jannet = 800;
+      var sonMum = tim + jannet; // 872
+      var scrollerWidth = $('#scroll').width; // width of scroller div
+
+      var onePercentSonMum = sonMum / 100;
+
+      var percentToScrollOver = scrollNumberConversion * onePercentSonMum;
+
+      if(percentToScrollOver >= 805){
+        percentToScrollOver = -805;
+      }
+
+      scrollNumberConversion = percentToScrollOver;
+
+      type = 'px';
+    }
+
+    $('#scroll').css('left',scrollNumberConversion + type);
+    $('#text').css('opacity' , opacify);
+
+
+    // need to make it so that for each percentage of scrolled down it moves scroll percentage left
+    // but needs to move percentage left plus the width of the 1st and 2nd card so the 3rd ends up where rob wants it
+
+
+
+ });
