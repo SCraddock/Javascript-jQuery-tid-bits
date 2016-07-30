@@ -1,0 +1,10 @@
+$(document).ready(function(){
+
+  $("*").each( function () {
+      var $this = $(this);
+      if (parseInt($this.css("fontSize")) < 24) {
+          $this.css({ "font-size": "24px" });
+      }
+  });
+
+});
