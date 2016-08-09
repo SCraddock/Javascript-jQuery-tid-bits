@@ -1,0 +1,59 @@
+http://stackoverflow.com/questions/11978995/how-to-change-color-of-svg-image-using-css-jquery-svg-image-replacement
+
+Drew Baker --> http://stackoverflow.com/users/503546/drew-baker
+
+Firstly, use an IMG tag in your HTML to embed an SVG graphic. I used Adobe Illustrator to make the graphic.
+
+<img id="facebook-logo" class="svg social-link" src="/images/logo-facebook.svg"/>
+This is just like how you'd embed a normal image. Note that you need to set the IMG to have a class of svg. The 'social-link' class is just for examples sake. The ID is not required, but is useful.
+
+Then use this jQuery code (in a separate file or inline in the HEAD).
+
+    /*
+     * Replace all SVG images with inline SVG
+     */
+        jQuery('img.svg').each(function(){
+            var $img = jQuery(this);
+            var imgID = $img.attr('id');
+            var imgClass = $img.attr('class');
+            var imgURL = $img.attr('src');
+
+            jQuery.get(imgURL, function(data) {
+                // Get the SVG tag, ignore the rest
+                var $svg = jQuery(data).find('svg');
+
+                // Add replaced image's ID to the new SVG
+                if(typeof imgID !== 'undefined') {
+                    $svg = $svg.attr('id', imgID);
+                }
+                // Add replaced image's classes to the new SVG
+                if(typeof imgClass !== 'undefined') {
+                    $svg = $svg.attr('class', imgClass+' replaced-svg');
+                }
+
+                // Remove any invalid XML tags as per http://validator.w3.org
+                $svg = $svg.removeAttr('xmlns:a');
+
+                // Replace image with new SVG
+                $img.replaceWith($svg);
+
+            }, 'xml');
+
+        });
+What the above code does is look for all IMG's with the class 'svg' and replace it with the inline SVG from the linked file. The massive advantage is that it allows you to use CSS to change the color of the SVG now, like so:
+
+svg:hover path {
+    fill: red;
+}
+The jQuery code I wrote also ports across the original images ID and classes. So this CSS works too:
+
+#facebook-logo:hover path {
+    fill: red;
+}
+Or:
+
+.social-link:hover path {
+    fill: red;
+}
+You can see an example of it working here: http://labs.funkhausdesign.com/examples/img-svg/img-to-svg.html
+
