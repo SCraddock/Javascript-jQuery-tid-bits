@@ -1,0 +1,18 @@
+
+
+    // Internet Explorer 6-10
+		var isIE = false;
+         /*@cc_on @*/
+		/*@
+			 $('#popup-wrapper').css('display', "block");
+			var isIE = true;
+         @*/
+
+		var isIE11 = !!(navigator.userAgent.match(/Trident/) && navigator.userAgent.match(/rv[ :]11/));
+        // true on IE11
+        // false on Edge and other IEs/browsers.
+
+		if(isIE11 != true && isIE != true ) {
+		 $('#popup-wrapper').css('display', "none");
+		} 
+		
