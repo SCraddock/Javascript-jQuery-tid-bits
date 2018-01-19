@@ -1,7 +1,15 @@
 <script type="text/javascript">
 
+
+
+
+  // disable right clicking on images
+  $("img").bind("contextmenu",function(e){
+    return false;
+  });
+
   // for each image disable right click
-  $('img').each(function() { $(this)[0].oncontextmenu = function() { return false; }; });
+  //$('img').each(function() { $(this)[0].oncontextmenu = function() { return false; }; });
 
   // pure javascript version
   // document.oncontextmenu = function(e) {
