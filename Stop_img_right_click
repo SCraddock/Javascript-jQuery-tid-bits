@@ -1,0 +1,12 @@
+<script type="text/javascript">
+
+  // for each image disable right click
+  $('img').each(function() { $(this)[0].oncontextmenu = function() { return false; }; });
+
+  // pure javascript version
+  // document.oncontextmenu = function(e) {
+  //   e = e || window.event;
+  //   if (/^img$/i.test((e.target || e.srcElement).nodeName)) return false;
+  // };
+
+</script>
