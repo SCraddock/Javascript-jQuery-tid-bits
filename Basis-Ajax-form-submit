@@ -13,14 +13,14 @@
 
          // getting the email inputted
          var form = $('#ajax-form');
-         	var formData = $(form).serialize();
+         var formData = $(form).serialize();
          var email = $('input[name=email]').val();
 
          // the ajax
          $.ajax({
            type:"post",
            url: $(form).attr('action'),
-           	data: formData,
+           data: formData,
            // when complete run this
            success:function(data){
               $('#subscribe').attr('disabled','true');
