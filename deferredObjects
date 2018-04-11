@@ -1,0 +1,30 @@
+  // If I understand this correctly the (beforeBaseStart) is a callback you need to .resolve() to say it's finished
+  
+  // So in this example, when the image is loaded the function is then resolved and the .when() can progress
+
+  // Create a deferred object 
+  var baseIsLoaded = $.Deferred(function (beforeBaseStart) {
+  
+    // On image load .resolve() the callback
+    $('img1').on("load", function() {
+      beforeBaseStart.resolve();
+    });
+    
+  // .promise() -- Return a Deferred's Promise object -- Not sure 
+  }).promise();
+  
+  
+  // Uncommented version
+  var fabricIsLoaded = $.Deferred(function (beforeFabricStart) {
+    $('img2').on("load", function() {
+      beforeFabricStart.resolve();
+    });
+  }).promise();
+
+  // This bit is fairly easy to understand
+  // when (all functions inside the brackets) have triggered .resolve() run code
+  $.when(baseIsLoaded, fabricIsLoaded).then(function () {
+    // do this when the when.() is completed :D
+    switchLayers(oldFabricLayerImageID, newFabricLayerImageID);
+    switchLayers(oldBaseLayerImageID, newBaseLayerImageID);
+  });
